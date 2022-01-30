@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "779098263455",
+    "project_id": "sesh-a4450",
+    "storage_bucket": "sesh-a4450.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779098263455:android:300d1f2da5daf26e19b7aa",
+        "android_client_info": {
+          "package_name": "de.alexochs.sesh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779098263455-8faqs9dtl67u8m0o83fabc943gnsq5e0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTj2QS58R77IPY6M3m8fDLcoQXotwbGrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779098263455-8faqs9dtl67u8m0o83fabc943gnsq5e0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "779098263455-3jmsttp5a86cd4lo552uk1qofnmboj1n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.alexochs.sesh"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
