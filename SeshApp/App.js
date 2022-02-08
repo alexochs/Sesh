@@ -1,69 +1,80 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Button,
-  Text,
-  Alert,
+	SafeAreaView,
+	StyleSheet,
+	View,
+	Button,
+	Text,
+	Alert,
+	ActivityIndicator,
 } from 'react-native';
-import {connect} from 'react-redux';
-import {changeCount} from './src/actions/counts';
-import {bindActionCreators} from 'redux';
-import database from '@react-native-firebase/database';
+import {useDispatch} from 'react-redux';
 
-class App extends Component {
-  incrementCount() {
-    let {count, actions} = this.props;
-    count++;
-    actions.changeCount(count);
-  }
+import Counter from './src/components/Counter';
+import Greeting from './src/components/Greeting';
+import Login from './src/components/Login';
 
-  decrementCount() {
-    let {count, actions} = this.props;
-    count--;
-    actions.changeCount(count);
-  }
+import {setUser} from './src/actions/user';
 
-  fetchCount() {
-    let {actions} = this.props;
-    database()
-      .ref('/users/testuser/counter')
-      .once('value')
-      .then(snapshot => {
-        actions.changeCount(snapshot.val().counter.toString());
-      });
-  }
+import auth from '@react-native-firebase/auth';
 
-  render() {
-    const {count} = this.props;
-    return (
-      <SafeAreaView styles={styles.container}>
-        <Button title="Increment" onPress={() => this.incrementCount()} />
-        <Text>{count}</Text>
-        <Button title="Decrement" onPress={() => this.decrementCount()} />
-        <Button title="Load Count from DB" onPress={() => this.fetchCount()} />
-      </SafeAreaView>
-    );
-  }
-}
+const App = () => {
+	const [initializing, setInitializing] = useState(true);
+	const [user, setUser] = useState();
+
+	//const dispatch = useDispatch();
+
+	const logout = () => {
+		auth()
+			.signOut()
+			.then(() => Alert.alert('User signed out!'));
+	};
+
+	// Handle user state changes
+	function onAuthStateChanged(user) {
+		console.log(user);
+		setUser(user);
+		if (initializing) {
+			setInitializing(false);
+		}
+	}
+
+	useEffect(() => {
+		const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+		return subscriber; // unsubscribe on unmount
+	}, []);
+
+	if (initializing) {
+		return (
+			<SafeAreaView style={styles.container}>
+				<ActivityIndicator size="large" />
+			</SafeAreaView>
+		);
+	}
+
+	if (!user) {
+		return (
+			<SafeAreaView style={styles.container}>
+				<Login />
+			</SafeAreaView>
+		);
+	}
+
+	return (
+		<SafeAreaView style={styles.container}>
+			<Greeting name={user.email} />
+			<Counter />
+			<Button title="Log out" onPress={logout} />
+		</SafeAreaView>
+	);
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
-const mapStateToProps = state => ({
-  count: state.count.count,
-});
-
-const ActionCreators = Object.assign({}, {changeCount});
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
