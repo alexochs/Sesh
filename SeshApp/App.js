@@ -22,16 +22,17 @@ const App = () => {
 	const [initializing, setInitializing] = useState(true);
 	const [user, setUser] = useState();
 
-	const dispatch = useDispatch();
+	//const dispatch = useDispatch();
 
-	/*const logout = () => {
+	const logout = () => {
 		auth()
 			.signOut()
 			.then(() => Alert.alert('User signed out!'));
-	};*/
+	};
 
 	// Handle user state changes
 	function onAuthStateChanged(user) {
+		console.log(user);
 		setUser(user);
 		if (initializing) {
 			setInitializing(false);
@@ -61,16 +62,9 @@ const App = () => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Greeting name="User" />
+			<Greeting name={user.email} />
 			<Counter />
-			<Button
-				title="Log out"
-				onPress={() => {
-					auth()
-						.signOut()
-						.then(() => Alert.alert('User signed out!'));
-				}}
-			/>
+			<Button title="Log out" onPress={logout} />
 		</SafeAreaView>
 	);
 };
