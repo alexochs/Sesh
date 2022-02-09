@@ -6,11 +6,11 @@ const Login = props => {
 	const [email, onChangeEmail] = React.useState('');
 	const [password, onChangePassword] = React.useState('');
 
-	/*const login = () => {
+	const login = () => {
 		auth()
 			.signInWithEmailAndPassword(email, password)
 			.then(() => {
-				Alert.alert('Successfully signed in!');
+				Alert.alert('You successfully signed in!');
 			})
 			.catch(error => {
 				Alert.alert('Failed to sign in!');
@@ -21,7 +21,7 @@ const Login = props => {
 		auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then(() => {
-				Alert.alert('User account created & signed in!');
+				Alert.alert('Your account was successfully created!');
 			})
 			.catch(error => {
 				if (error.code === 'auth/email-already-in-use') {
@@ -34,7 +34,7 @@ const Login = props => {
 
 				console.error(error);
 			});
-	};*/
+	};
 
 	return (
 		<View>
@@ -65,44 +65,8 @@ const Login = props => {
 					/>
 				</View>
 				<View style={styles.buttons}>
-					<Button
-						title="Login"
-						onPress={() => {
-							auth()
-								.signInWithEmailAndPassword(email, password)
-								.then(() => {
-									Alert.alert('Successfully signed in!');
-								})
-								.catch(error => {
-									Alert.alert('Failed to sign in!');
-								});
-						}}
-					/>
-					<Button
-						title="Register"
-						onPress={() => {
-							auth()
-								.createUserWithEmailAndPassword(email, password)
-								.then(() => {
-									Alert.alert('User account created & signed in!');
-								})
-								.catch(error => {
-									if (error.code === 'auth/email-already-in-use') {
-										Alert.alert('That email seems to be already in use!');
-									}
-
-									if (error.code === 'auth/invalid-email') {
-										Alert.alert('Try a valid email address!');
-									}
-									
-                                    if (error.code === 'auth/weak-password') {
-										Alert.alert('Try a stronger password!');
-									}
-
-									console.error(error);
-								});
-						}}
-					/>
+					<Button title="Login" onPress={login} />
+					<Button title="Register" onPress={register} />
 				</View>
 			</View>
 		</View>
