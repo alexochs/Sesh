@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 
+#import <GoogleMaps/GoogleMaps.h>
+
 #import <Firebase.h>
 
 #import <React/RCTBridge.h>
@@ -29,6 +31,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyCSsV0H1Up7z370VrUPRMNZgVQnNIoMVx4"];
   [FIRApp configure];
       
 #ifdef FB_SONARKIT_ENABLED

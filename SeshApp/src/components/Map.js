@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, StyleSheet} from "react-native";
-import MapView from "react-native-maps";
+import {Text, View, StyleSheet} from 'react-native';
+import MapView from 'react-native-maps';
 
 const Map = (props) => {
   return (
@@ -13,8 +13,7 @@ const Map = (props) => {
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
-     >
-     </MapView>
+      />
    </View>
   );
 };
