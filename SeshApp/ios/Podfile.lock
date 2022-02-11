@@ -355,7 +355,9 @@ PODS:
     - Firebase/Installations (= 8.11.0)
     - React-Core
     - RNFBApp
-  - RNScreens (3.11.0):
+  - RNGestureHandler (2.2.0):
+    - React-Core
+  - RNScreens (3.11.1):
     - React-Core
     - React-RCTImage
   - Yoga (1.14.0)
@@ -398,6 +400,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBDatabase (from `../node_modules/@react-native-firebase/database`)"
   - "RNFBInstallations (from `../node_modules/@react-native-firebase/installations`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -488,6 +491,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/database"
   RNFBInstallations:
     :path: "../node_modules/@react-native-firebase/installations"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   Yoga:
@@ -542,7 +547,8 @@ SPEC CHECKSUMS:
   RNFBAuth: 59bc007b0766b773f91456969d01b4cb65bab67b
   RNFBDatabase: 3153bc48dfa247c772226e94ed40ac48d580ea49
   RNFBInstallations: c841b6b629f663eb63f63c325d54aa4c081d0a4a
-  RNScreens: fd535547baa4ef8aeaee1a8b1e3ffd17b8df44a4
+  RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
+  RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
 
 PODFILE CHECKSUM: 0ceb30d564365350606ae8a279271833517afded

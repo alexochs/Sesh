@@ -1,10 +1,9 @@
 import React from 'react';
-import {Text, View, StyleSheet} from "react-native";
-import MapView from "react-native-maps";
+import {Text, View, StyleSheet} from 'react-native';
+import MapView from 'react-native-maps';
 
-const Map = (props) => {
+const Map = () => {
   return (
-    <View style={styles.container}>
      <MapView
        style={styles.map}
        region={{
@@ -13,22 +12,14 @@ const Map = (props) => {
          latitudeDelta: 0.015,
          longitudeDelta: 0.0121,
        }}
-     >
-     </MapView>
-   </View>
+      />
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      ...StyleSheet.absoluteFillObject,
-      height: 400,
-      width: 400,
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
     map: {
-      ...StyleSheet.absoluteFillObject,
+      width: 400,
+      height: 400,
     },
    });
 
