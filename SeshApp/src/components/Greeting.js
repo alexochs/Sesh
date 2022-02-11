@@ -4,7 +4,7 @@ import {StyleSheet, Text} from 'react-native';
 const Greeting = props => {
 	return (
 		<Text style={styles.greeting}>
-			<Text>Welcome, </Text>
+			<Text>Hey, </Text>
 			<Text style={styles.username}>{props.name} </Text>
 			<Text>👋</Text>
 		</Text>
