@@ -69,7 +69,7 @@ const Login = ({navigation}) => {
 				</View>
 				<View style={styles.newAccount}>
 					<Text>Don't have an account? </Text>
-					<Pressable onPress={() => navigation.push("UserCreation")}>
+					<Pressable onPress={() => navigation.push("UserCreationMail")}>
 						<Text style={styles.newAccountText}>Make a new one.</Text>
 					</Pressable>
 				</View>
