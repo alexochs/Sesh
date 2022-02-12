@@ -7,9 +7,10 @@ import {
   TextInput,
   Button,
 } from 'react-native';
+import auth from '@react-native-firebase/auth';
 import firestore from "@react-native-firebase/firestore";
 
-const NewEvent = () => {
+const NewEvent = ({navigation}) => {
   const [name, onChangeName] = React.useState('');
 	const [description, onChangeDescription] = React.useState('');
 
@@ -17,9 +18,13 @@ const NewEvent = () => {
     firestore()
       .collection("events")
       .add({
-        creator: 
+        creator: auth().currentUser.uid,
+        name: name,
+        description: description,
+      })
+      .then(() => {
+        navigation.pop();
       });
-    console.log("Event created!");
   };
 
   return (
