@@ -21,6 +21,7 @@ const UserCreationPassword = ({navigation}) => {
 				<Text>Set your </Text>
 				<Text style={styles.bold}>Password</Text>
 			</Text>
+			<Text>Cause you know... safety first</Text>
 			<TextInput
 				style={styles.input}
 				onChangeText={onChangePassword}
