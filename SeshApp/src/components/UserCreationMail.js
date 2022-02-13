@@ -8,10 +8,11 @@ const UserCreationMail = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
         <Text style={styles.greeting}>
-			<Text>What's your </Text>
+			<Text>Can I have your </Text>
 			<Text style={styles.bold}>Mail</Text>
 			<Text>?</Text>
 		</Text>
+		<Text>Your account is based on your mail address</Text>
 		<TextInput
 			style={styles.input}
 			onChangeText={onChangeMail}

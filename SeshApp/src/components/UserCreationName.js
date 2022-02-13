@@ -12,6 +12,7 @@ const UserCreationName = ({navigation}) => {
 			<Text style={styles.bold}>Name</Text>
 			<Text>?</Text>
 		</Text>
+		<Text>That's your username you'll be known as</Text>
 		<TextInput
 			style={styles.input}
 			onChangeText={onChangeName}
