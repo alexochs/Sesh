@@ -12,7 +12,7 @@ const UserCreationPicture = ({navigation}) => {
 			<Text>Upload your </Text>
 			<Text style={styles.bold}>Picture</Text>
 		</Text>
-		<Text>Don't worry, you can skip this step</Text>
+		<Text>Just tap on it, you don't have to</Text>
 		<View style={{marginTop: 64}}>
 			<UserProfilePicture />
 		</View>
