@@ -1,8 +1,8 @@
 import React from 'react';
-import {StyleSheet, View, Text, TextInput, Button, Alert} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Button, Alert, SafeAreaView, Pressable} from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-const Login = props => {
+const Login = ({navigation}) => {
 	const [email, onChangeEmail] = React.useState('');
 	const [password, onChangePassword] = React.useState('');
 
@@ -37,7 +37,7 @@ const Login = props => {
 	};
 
 	return (
-		<View>
+		<SafeAreaView style={styles.container}>
 			<View style={{margin: 32}}>
 				<Text style={styles.greeting}>
 					<Text>Welcome to </Text>
@@ -66,14 +66,24 @@ const Login = props => {
 				</View>
 				<View style={styles.buttons}>
 					<Button title="Login" onPress={login} />
-					<Button title="Register" onPress={register} />
+				</View>
+				<View style={styles.newAccount}>
+					<Text>Don't have an account? </Text>
+					<Pressable onPress={() => navigation.push("UserCreationMail")}>
+						<Text style={styles.newAccountText}>Make a new one.</Text>
+					</Pressable>
 				</View>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	greeting: {
 		fontSize: 30,
 	},
@@ -87,11 +97,16 @@ const styles = StyleSheet.create({
 		marginTop: 12,
 		padding: 10,
 		borderRadius: 8,
+		width: 250,
 	},
-	buttons: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+	newAccount: {
+		flexDirection: "row",
+		marginTop: 64,
 	},
+	newAccountText: {
+		fontWeight: "bold",
+		textDecorationLine: "underline",
+	}
 });
 
 export default Login;

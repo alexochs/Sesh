@@ -7,10 +7,8 @@ import {
 	ActivityIndicator,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-
 import Main from './src/components/Main';
-import Login from './src/components/Login';
-
+import LandingStack from './src/routes/LandingStack';
 import auth from '@react-native-firebase/auth';
 
 const App = () => {
@@ -42,9 +40,9 @@ const App = () => {
 	// Landing screen
 	if (!user) {
 		return (
-			<SafeAreaView style={styles.container}>
-				<Login />
-			</SafeAreaView>
+			<NavigationContainer>
+				<LandingStack />
+			</NavigationContainer>
 		);
 	}
 
