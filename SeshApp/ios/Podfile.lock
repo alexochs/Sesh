@@ -368,6 +368,9 @@ PODS:
   - Firebase/Installations (8.12.1):
     - Firebase/CoreOnly
     - FirebaseInstallations (~> 8.12.0)
+  - Firebase/Storage (8.12.1):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 8.12.0)
   - FirebaseAuth (8.12.0):
     - FirebaseCore (~> 8.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -403,6 +406,9 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/UserDefaults (~> 7.7)
     - PromisesObjC (< 3.0, >= 1.2)
+  - FirebaseStorage (8.12.0):
+    - FirebaseCore (~> 8.0)
+    - GTMSessionFetcher/Core (~> 1.5)
   - fmt (6.2.1)
   - glog (0.3.5)
   - GoogleDataTransport (9.1.2):
@@ -746,6 +752,10 @@ PODS:
     - Firebase/Installations (= 8.12.1)
     - React-Core
     - RNFBApp
+  - RNFBStorage (14.4.0):
+    - Firebase/Storage (= 8.12.1)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (2.2.0):
     - React-Core
   - RNScreens (3.11.1):
@@ -793,6 +803,7 @@ DEPENDENCIES:
   - "RNFBDatabase (from `../node_modules/@react-native-firebase/database`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBInstallations (from `../node_modules/@react-native-firebase/installations`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -808,6 +819,7 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseFirestore
     - FirebaseInstallations
+    - FirebaseStorage
     - fmt
     - GoogleDataTransport
     - GoogleUtilities
@@ -893,6 +905,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBInstallations:
     :path: "../node_modules/@react-native-firebase/installations"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
@@ -914,6 +928,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: f130b3d45b2a7a0b86059734d5bd67353df8d32f
   FirebaseFirestore: dfeb58916ee3ae0ef2453d4849a683672705920c
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
+  FirebaseStorage: 4b75458c35d8b728e4c1fc1371942997456ab299
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
@@ -956,6 +971,7 @@ SPEC CHECKSUMS:
   RNFBDatabase: 54ecb4d71f06f397a63520e1b4311858adb1182a
   RNFBFirestore: cd240246412393409e80f5d6a701e43b8a52452c
   RNFBInstallations: ebba9963588fd1950c06148e45608462896d62d9
+  RNFBStorage: 3c9ee686da69bc5fb6eafec1ddb0c5b4724b4653
   RNGestureHandler: bf572f552ea324acd5b5464b8d30755b2d8c1de6
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468

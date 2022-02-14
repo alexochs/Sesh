@@ -2,11 +2,13 @@ import React from 'react';
 import {Text, StyleSheet, TextInput, Button, View, Image, Pressable, Modal, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { useDispatch, useSelector } from 'react-redux';
 import UserProfilePicture from './UserProfilePicture';
 
 const UserCreationPicture = ({navigation}) => {
-	const [picture, setPicture] = React.useState(null);
+	const [picture, setPicture] = React.useState(useSelector((state) => state.userCreationData.photo));
 	const [modalVisible, setModalVisible] = React.useState(false);
+	const dispatch = useDispatch();
 
 	const uploadFromLibrary = () => {
 		const options = {
@@ -21,7 +23,8 @@ const UserCreationPicture = ({navigation}) => {
 				Alert.alert(result.errorMessage);
 			}
 			else {
-				setPicture(result.assets[0].uri);
+				const uri = result.assets[0].uri;
+				setPicture(uri);
 				setModalVisible(false);
 			}
 		});
@@ -41,10 +44,16 @@ const UserCreationPicture = ({navigation}) => {
 				Alert.alert("Error: " + result.errorCode);
 			}
 			else {
-				setPicture(result.assets[0].uri);
+				const uri = result.assets[0].uri;
+				setPicture(uri);
 				setModalVisible(false);
 			}
 		});
+	};
+
+	const next = () => {
+		dispatch({type: "USER_CREATION_PHOTO", payload: picture});
+		navigation.push("UserCreationPassword");
 	};
 
 	return (
@@ -62,7 +71,7 @@ const UserCreationPicture = ({navigation}) => {
 			<View style={{marginTop: 64}}>
 				<Button
 					title="Continue"
-					onPress={() => navigation.push('UserCreationPassword')}
+					onPress={() => next()}
 				/>
 			</View>
 			<Modal

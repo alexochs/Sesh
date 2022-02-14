@@ -1,19 +1,91 @@
 import React from 'react';
 import {Text, StyleSheet, TextInput, Button, View, Alert } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSelector } from 'react-redux';
+import auth from '@react-native-firebase/auth';
+import firestore from "@react-native-firebase/firestore";
+import storage from '@react-native-firebase/storage';
 
 const UserCreationPassword = ({navigation}) => {
   	const [password, onChangePassword] = React.useState("");
   	const [passwordVerify, onChangePasswordVerify] = React.useState("");
+	const mail = useSelector((state) => state.userCreationData.mail);
+	const username = useSelector((state) => state.userCreationData.username);
+	const photoURI = useSelector((state) => state.userCreationData.photo);
 
-	const verifyPassword = () => {
-		if (password !== passwordVerify) {
-			Alert.alert("Passwords do not match! Try again...");
+	const validatePassword = () => {
+		if (password.length < 5) {
+			Alert.alert("You should use a better password 👀");
+			return false;
+		}
+		else if (password !== passwordVerify) {
+			Alert.alert("Seems like your passwords do not match 🧐");
+			return false;
 		}
 		else {
-			Alert.alert("User creation process finished!");
+			return true;
 		}
-	}
+	};
+
+	const createUser = () => {
+		auth()
+		.createUserWithEmailAndPassword(mail, password)
+		.then(() => {
+			firestore()
+				.collection("takenUsernames")
+				.doc(username.toLowerCase())
+				.set({taken: true})
+				.then(() => {
+					auth().currentUser.updateProfile({
+						displayName: username.toLowerCase(),
+					})
+					.then(() => {
+						storage()
+							.ref(username.toLowerCase() + "-pp.jpeg")
+							.putFile(photoURI)
+							.then(async () => {
+								const url = await storage().ref(username.toLowerCase() + "-pp.jpeg").getDownloadURL();
+								auth().currentUser.updateProfile({
+									displayName: username.toLowerCase(),
+									photoURL: url,
+								})
+								.then(() => {
+									Alert.alert('Your account was successfully created!');
+								})
+								.catch(error => {
+									console.error(error);
+								});
+							})
+							.catch(error => {
+								console.error(error);
+							});
+					})
+					.catch(error => {
+						console.error(error);
+					});
+				})
+				.catch(error => {
+					console.error(error);
+				});
+		})
+		.catch(error => {
+			if (error.code === 'auth/email-already-in-use') {
+				Alert.alert('The email address you entered is already in use!');
+			}
+
+			if (error.code === 'auth/invalid-email') {
+				Alert.alert('The email address your entered is invalid!');
+			}
+
+			console.error(error);
+		});
+	};
+
+	const next = () => {
+		if (validatePassword()) {
+			createUser();
+		}
+	};
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -39,7 +111,7 @@ const UserCreationPassword = ({navigation}) => {
 			<View style={{marginTop: 64}}>
 				<Button
 					title="Finish"
-					onPress={verifyPassword}
+					onPress={next}
 				/>
 			</View>
 		</SafeAreaView>
