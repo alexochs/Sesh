@@ -16,6 +16,10 @@ const UserProfile = props => {
 			.then(() => Alert.alert('You successfully signed out!'));
 	};
 
+	React.useEffect(() => {
+		console.log(auth().currentUser);
+	});
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<Text>UID: {props.user.uid}</Text>

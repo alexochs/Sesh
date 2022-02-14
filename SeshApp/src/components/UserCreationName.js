@@ -9,11 +9,25 @@ const UserCreationName = ({navigation}) => {
 	const dispatch = useDispatch();
 
 	const validateName = async () => {
-		console.log("Validating name: " + name.toLowerCase());
+		if (name.length < 3) {
+			Alert.alert("A bit short, isn't it? Try at least 3 characters.");
+			return false;
+		} 
+		else if (name.length > 30) {
+			Alert.alert("That's a long name... try less characters.");
+			return false;
+		}
 		const user = await firestore().collection('takenUsernames').doc(name.toLowerCase()).get();
-		if (!user.data()) return true;
-		else if (user.data().taken) return false;
-		else return true;
+		if (!user.data()) {
+			return true;
+		}
+		else if (user.data().taken) {
+			Alert.alert("This username is already taken 😕");
+			return false;
+		}
+		else {
+			return true;
+		}
 	};
 
 	const next = async () => {
@@ -21,9 +35,6 @@ const UserCreationName = ({navigation}) => {
 		if (available) {
 			dispatch({type: "USER_CREATION_USERNAME", payload: name.toLowerCase()});
 			navigation.push("UserCreationPicture");
-		}
-		else {
-			Alert.alert("This username is already taken 😕");
 		}
 	};
 
