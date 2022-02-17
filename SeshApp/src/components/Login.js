@@ -5,6 +5,8 @@ import auth from '@react-native-firebase/auth';
 const Login = ({navigation}) => {
 	const [email, onChangeEmail] = React.useState('');
 	const [password, onChangePassword] = React.useState('');
+	const [showPassword, setShowPassword] = React.useState(false);
+	const [showPasswordText, setShowPasswordText] = React.useState("Show Password");
 
 	const login = () => {
 		auth()
@@ -36,6 +38,13 @@ const Login = ({navigation}) => {
 			});
 	};
 
+	const togglePassword = () => {
+		setShowPassword(!showPassword);
+		showPasswordText === "Show Password" ?
+			setShowPasswordText("Hide Password") 
+			: setShowPasswordText("Show Password");
+	};
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={{margin: 32}}>
@@ -62,7 +71,11 @@ const Login = ({navigation}) => {
 						onChangeText={onChangePassword}
 						value={password}
 						placeholder="Enter your password"
+						secureTextEntry={!showPassword}
 					/>
+				</View>
+				<View style={styles.buttons}>
+					<Button title={showPasswordText} onPress={togglePassword} />
 				</View>
 				<View style={styles.buttons}>
 					<Button title="Login" onPress={login} />

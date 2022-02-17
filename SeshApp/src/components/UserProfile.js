@@ -8,6 +8,7 @@ import {
 	ActivityIndicator,
 	Text,
 } from 'react-native';
+import UserProfilePicture from './UserProfilePicture';
 
 const UserProfile = props => {
 	const logout = () => {
@@ -22,12 +23,13 @@ const UserProfile = props => {
 
 	return (
 		<SafeAreaView style={styles.container}>
+			<UserProfilePicture url={props.user.photoURL}/>
 			<Text>UID: {props.user.uid}</Text>
 			<Text>Username: {props.user.displayName}</Text>
 			<Text>Email: {props.user.email}</Text>
 			<Text>Is Email verified: {props.user.emailVerified}</Text>
 			<Text>Phone number: {props.user.phoneNumber}</Text>
-			<Text>Photo URL: {props.user.photoUrl}</Text>
+			<Text>Photo URL: {props.user.photoURL}</Text>
 			<Button title="Log out" onPress={logout} />
 		</SafeAreaView>
 	);
