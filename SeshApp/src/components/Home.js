@@ -18,11 +18,18 @@ import Map from "./Map";
 import EventListPreview from './EventListPreview';
 
 const Home = ({navigation}) => {
-	const [events, setEvents] = React.useState([]);
 	const dispatch = useDispatch();
 
-	useFocusEffect(() => {
-		console.log("fetching events");
+	React.useEffect(() => {
+		console.log("fetch shit");
+		fetchEvents();
+		firestore()
+			.collection('events')
+			.onSnapshot(updateEvents, () => console.error("Error fetching events!"));
+	}, []);
+
+	const fetchEvents = () => {
+		dispatch({type: "CLEAR_EVENTS"});
 		firestore()
 			.collection('events')
 			.get()
@@ -31,10 +38,17 @@ const Home = ({navigation}) => {
 				eventSnapshots.forEach((eventSnapshot) => {
 					eventsData.push(eventSnapshot.data());
 				});
-				dispatch({type: "FETCHED_EVENTS", payload: eventsData});
-				console.log(eventsData);
+				dispatch({type: "SET_EVENTS", payload: eventsData});
 			});
-	}, []);
+	};
+
+	const updateEvents = (eventSnapshots) => {
+		var eventsData = [];
+		eventSnapshots.forEach((eventSnapshot) => {
+			eventsData.push(eventSnapshot.data());
+		});
+		dispatch({type: "SET_EVENTS", payload: eventsData});
+	};
 
 	return (
 		<View style={styles.container}>
