@@ -1,12 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const EventDetail = props => {
+const EventDetail = ({route, navigation}) => {
+	const event = route.params;
+
 	return (
 		<View style={styles.container}>
-			<Text style={styles.name}>{props.event.name}</Text>
-			<Text style={styles.description}>{props.event.description}</Text>
-			<Text style={styles.description}>Created by: {props.event.creator}</Text>
+			<Text style={styles.name}>{event.name}</Text>
+			<Text style={styles.description}>{event.description}</Text>
+			<Text style={styles.description}>Created by: {event.creator}</Text>
 		</View>
 	);
 };
@@ -14,6 +16,9 @@ const EventDetail = props => {
 const styles = StyleSheet.create({
 	container: {
 		margin: 12,
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "center"
 	},
 	name: {
 		fontSize: 24,

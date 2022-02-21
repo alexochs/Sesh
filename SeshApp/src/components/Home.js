@@ -56,7 +56,7 @@ const Home = ({navigation}) => {
 			<Button title="New Event" onPress={() => navigation.navigate("NewEvent")}/>
 			<FlatList
 				data={useSelector((state) => state.events.events)}
-				renderItem={({item}) => <EventListPreview name={item.name} description={item.description}/>}
+				renderItem={({item}) => <EventListPreview event={item} navigation={navigation}/>}
 			/>
 		</View>
 	);
