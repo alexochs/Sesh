@@ -1,12 +1,18 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Pressable} from 'react-native';
 
 const EventListPreview = props => {
+	const showDetails = () => {
+		console.log("showDetails()");
+	};
+
 	return (
-		<View style={styles.container}>
-			<Text style={styles.name}>{props.name}</Text>
-			<Text style={styles.description}>{props.description}</Text>
-		</View>
+		<Pressable onPress={showDetails}>
+			<View style={styles.container}>
+				<Text style={styles.name}>{props.name}</Text>
+				<Text style={styles.description}>{props.description}</Text>
+			</View>
+		</Pressable>
 	);
 };
 
