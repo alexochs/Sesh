@@ -120,6 +120,7 @@ const UserCreationPassword = ({navigation}) => {
 				value={password}
 				placeholder="Enter your password"
 				secureTextEntry={true}
+				autoCapitalize='none'
 			/>
 			<TextInput
 				style={styles.input}
@@ -127,6 +128,7 @@ const UserCreationPassword = ({navigation}) => {
 				value={passwordVerify}
 				placeholder="Verify your password"
 				secureTextEntry={true}
+				autoCapitalize='none'
 			/>
 			<View style={{marginTop: 64}}>
 				<Button

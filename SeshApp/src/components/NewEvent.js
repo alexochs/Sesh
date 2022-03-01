@@ -10,22 +10,24 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from "@react-native-firebase/firestore";
+import Geolocation from "react-native-geolocation-service";
 
 const NewEvent = ({navigation}) => {
   const [name, onChangeName] = React.useState('');
 	const [description, onChangeDescription] = React.useState('');
 
   const createEvent = () => {
-    firestore()
+    Geolocation.getCurrentPosition((position) => {
+      firestore()
       .collection("events")
       .add({
         creator: auth().currentUser.uid,
         name: name,
         description: description,
         dateCreated: new Date().getTime(),
+        geolocation: position,
       })
       .then((doc) => {
-        console.log("LOL: " + doc.id.toString());
         firestore()
           .collection("events")
           .doc(doc.id.toString())
@@ -44,6 +46,10 @@ const NewEvent = ({navigation}) => {
         Alert.alert("Error creating event :(");
         console.error(err);
       });
+    },
+    (error) => {
+      console.error(error);
+    });
   };
 
   return (

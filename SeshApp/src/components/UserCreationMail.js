@@ -38,6 +38,7 @@ const UserCreationMail = ({navigation}) => {
 				onChangeText={onChangeMail}
 				value={mail}
 				placeholder="Type in your mail address"
+				autoCapitalize='none'
 			/>
 			<View style={{marginTop: 64}}>
 				<Button

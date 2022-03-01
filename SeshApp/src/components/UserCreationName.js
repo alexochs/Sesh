@@ -57,6 +57,7 @@ const UserCreationName = ({navigation}) => {
 				onChangeText={onChangeName}
 				value={name}
 				placeholder="How do you want to be called?"
+				autoCapitalize='none'
 			/>
 			<View style={{marginTop: 64}}>
 				<Button
