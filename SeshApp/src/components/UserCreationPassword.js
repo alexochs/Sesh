@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, TextInput, Button, View, Alert } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import auth from '@react-native-firebase/auth';
 import firestore from "@react-native-firebase/firestore";
 import storage from '@react-native-firebase/storage';
@@ -12,6 +12,7 @@ const UserCreationPassword = ({navigation}) => {
 	const mail = useSelector((state) => state.userCreationData.mail);
 	const username = useSelector((state) => state.userCreationData.username);
 	const photoURI = useSelector((state) => state.userCreationData.photo);
+	const dispatch = useDispatch();
 
 	const validatePassword = () => {
 		if (password.length < 5) {
@@ -40,17 +41,31 @@ const UserCreationPassword = ({navigation}) => {
 						displayName: username.toLowerCase(),
 					})
 					.then(() => {
-						storage()
+						if (photoURI) {
+							storage()
 							.ref(username.toLowerCase() + "-pp.jpeg")
 							.putFile(photoURI)
 							.then(async () => {
 								const url = await storage().ref(username.toLowerCase() + "-pp.jpeg").getDownloadURL();
 								auth().currentUser.updateProfile({
-									displayName: username.toLowerCase(),
 									photoURL: url,
 								})
 								.then(() => {
-									Alert.alert('Your account was successfully created!');
+									firestore()
+										.collection("userdata")
+										.doc(auth().currentUser.uid)
+										.set({
+											created: new Date().getTime(),
+											username: auth().currentUser.displayName,
+											photoURL: auth().currentUser.photoURL,
+										})
+										.then(() => {
+											Alert.alert('Your account was successfully created!');
+											dispatch({type: "CLEAR_USER_CREATION_DATA"});
+										})
+										.catch(error => {
+											console.error(error);
+										})
 								})
 								.catch(error => {
 									console.error(error);
@@ -59,6 +74,11 @@ const UserCreationPassword = ({navigation}) => {
 							.catch(error => {
 								console.error(error);
 							});
+						}
+						else {
+							Alert.alert('Your account was successfully created!');
+							dispatch({type: "CLEAR_USER_CREATION_DATA"});
+						}
 					})
 					.catch(error => {
 						console.error(error);

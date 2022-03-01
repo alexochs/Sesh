@@ -1,4 +1,4 @@
-import {USER_CREATION_MAIL, USER_CREATION_USERNAME, USER_CREATION_PHOTO, USER_CREATION_PASSWORD} from "../constants";
+import {USER_CREATION_MAIL, USER_CREATION_USERNAME, USER_CREATION_PHOTO, USER_CREATION_PASSWORD, CLEAR_USER_CREATION_DATA} from "../constants";
 
 const initialState = {
   mail: "",
@@ -31,6 +31,15 @@ const userCreationDataReducer = (state = initialState, action) => {
       return {
         ...state,
         password: action.payload,
+      };
+
+    case CLEAR_USER_CREATION_DATA:
+      return {
+        ...state,
+        mail: "",
+        username: "",
+        photo: "",
+        password: "",
       };
 
     default:

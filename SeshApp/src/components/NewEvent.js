@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Button,
+  Alert,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from "@react-native-firebase/firestore";
@@ -21,9 +22,27 @@ const NewEvent = ({navigation}) => {
         creator: auth().currentUser.uid,
         name: name,
         description: description,
+        dateCreated: new Date().getTime(),
       })
-      .then(() => {
-        navigation.pop();
+      .then((doc) => {
+        console.log("LOL: " + doc.id.toString());
+        firestore()
+          .collection("events")
+          .doc(doc.id.toString())
+          .update({
+            eventid: doc.id,
+          })
+          .then(() => {
+            navigation.pop();
+          })
+          .catch((err) => {
+            Alert.alert("Error updating event id :(");
+            console.error(err);
+          });
+      })
+      .catch((err) => {
+        Alert.alert("Error creating event :(");
+        console.error(err);
       });
   };
 

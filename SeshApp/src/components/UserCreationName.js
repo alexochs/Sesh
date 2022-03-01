@@ -9,6 +9,12 @@ const UserCreationName = ({navigation}) => {
 	const dispatch = useDispatch();
 
 	const validateName = async () => {
+		const regexValid = String(name).match(/^[a-z0-9/._-]+$/);
+		if (!regexValid) {
+			Alert.alert("You can only use lower case letters, numbers and these special characters: . - _");
+			return false;
+		}
+
 		if (name.length < 3) {
 			Alert.alert("A bit short, isn't it? Try at least 3 characters.");
 			return false;

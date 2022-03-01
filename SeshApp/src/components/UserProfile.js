@@ -7,7 +7,9 @@ import {
 	Alert,
 	ActivityIndicator,
 	Text,
+	View,
 } from 'react-native';
+import UserProfilePicture from './UserProfilePicture';
 
 const UserProfile = props => {
 	const logout = () => {
@@ -22,12 +24,11 @@ const UserProfile = props => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Text>UID: {props.user.uid}</Text>
-			<Text>Username: {props.user.displayName}</Text>
-			<Text>Email: {props.user.email}</Text>
-			<Text>Is Email verified: {props.user.emailVerified}</Text>
-			<Text>Phone number: {props.user.phoneNumber}</Text>
-			<Text>Photo URL: {props.user.photoUrl}</Text>
+			<View>
+				<UserProfilePicture url={auth().currentUser.photoURL}/>
+				<Text>{auth().currentUser.displayName}</Text>
+			</View>
+			<Text>Joined: N/A (fetch data)</Text>
 			<Button title="Log out" onPress={logout} />
 		</SafeAreaView>
 	);
