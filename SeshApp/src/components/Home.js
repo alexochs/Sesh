@@ -21,7 +21,6 @@ const Home = ({navigation}) => {
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {
-		console.log("fetch shit");
 		fetchEvents();
 		firestore()
 			.collection('events')

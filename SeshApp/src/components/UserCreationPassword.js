@@ -51,8 +51,21 @@ const UserCreationPassword = ({navigation}) => {
 									photoURL: url,
 								})
 								.then(() => {
-									Alert.alert('Your account was successfully created!');
-									dispatch({type: "CLEAR_USER_CREATION_DATA"});
+									firestore()
+										.collection("userdata")
+										.doc(auth().currentUser.uid)
+										.set({
+											created: new Date().getTime(),
+											username: auth().currentUser.displayName,
+											photoURL: auth().currentUser.photoURL,
+										})
+										.then(() => {
+											Alert.alert('Your account was successfully created!');
+											dispatch({type: "CLEAR_USER_CREATION_DATA"});
+										})
+										.catch(error => {
+											console.error(error);
+										})
 								})
 								.catch(error => {
 									console.error(error);
