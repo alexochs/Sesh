@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Alert} from 'react-native';
 import MapView from 'react-native-maps';
+import Marker from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 
 const Map = () => {
@@ -8,6 +9,7 @@ const Map = () => {
 
   const getLocation = () => {
     Geolocation.getCurrentPosition((position) => {
+      console.log("Position => " + JSON.stringify(position));
       setGeolocation(position);
     },
     (error) => {
@@ -42,10 +44,17 @@ const Map = () => {
         region={{
           latitude: geolocation.coords.latitude,
           longitude: geolocation.coords.longitude,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
         }}
-       />
+       >
+        <Marker
+          key="0"
+          coordinate={{ latitude : geolocation.coords.latitude , longitude : geolocation.coords.longitude }}
+          title="Title"
+          description="Description"
+        />
+      </MapView>
    );
   }
   else {
